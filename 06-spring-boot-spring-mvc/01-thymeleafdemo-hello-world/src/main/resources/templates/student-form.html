@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form</title>
+</head>
+<body>
+<h3>Student Register Form</h3>
+
+<form th:action="@{/processStudentForm}" th:object="${student}" method="POST">
+    First Name: <input type="text" th:field="*{firstName}"/>
+
+    <br><br>
+
+    Last Name: <input type="text" th:field="*{lastName}"/>
+
+    <br><br>
+
+    Country:
+    <select th:field="*{country}">
+        <!--    Get dynamic values from app properties    -->
+        <option th:each="country: ${countries}" th:value="${country}" th:text="${country}"/>
+
+        <!-- Hard code for option value -->
+        <!--        <option th:value="Brazil">Brazil</option>-->
+        <!--        <option th:value="France">France</option>-->
+        <!--        <option th:value="Germany">Germany</option>-->
+        <!--        <option th:value="Indian">Indian</option>-->
+    </select>
+
+    <br><br>
+
+    Favourite Programming Languages:
+    <input
+            type="radio"
+            th:each="item: ${programmingLanguages}"
+            th:field="*{favouriteLanguage}"
+            th:value="${item}"
+            th:text="${item}"
+    >
+
+    <!-- Hard code for radio button -->
+    <!--    <input type="radio" th:field="*{favouriteLanguage}" th:value="Go">Go</input>-->
+    <!--    <input type="radio" th:field="*{favouriteLanguage}" th:value="Python">Python</input>-->
+    <!--    <input type="radio" th:field="*{favouriteLanguage}" th:value="Java">Java</input>-->
+
+    <br><br>
+
+    Favourite Systems:
+    <input
+            type="checkbox"
+            th:each="item: ${systems}"
+            th:field="*{favouriteSystems}"
+            th:value="${item}"
+            th:text="${item}"
+    >
+
+    <br><br>
+
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>
